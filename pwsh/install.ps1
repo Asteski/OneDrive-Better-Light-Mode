@@ -33,7 +33,7 @@ ForEach ($searchDir in $searchDirList){
         $backupPath = $dllPath.Replace([System.IO.Path]::GetExtension($dllPath), "_backup" + [System.IO.Path]::GetExtension($dllPath))
         Write-Host "Backup path: $backupPath" -ForegroundColor DarkYellow
         Copy-Item -Path $dllPath -Destination $backupPath -Force
-        Write-Host "Applying new icons..." -ForegroundColor Yellow
+        Write-Host "`nApplying new icons..." -ForegroundColor Yellow
         ForEach ($newIconPath in $newIconList) {
             $iconGroup = "ICONGROUP," + [int]([regex]::Match($newIconPath, '_(\d+)\.ico$').Groups[1].Value)
             ..\bin\ResourceHacker.exe -open $dllPath -save $dllPath -action addoverwrite -res $newIconPath -mask $iconGroup
