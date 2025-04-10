@@ -31,7 +31,7 @@ ForEach ($searchDir in $searchDirList){
         $backupPath = Get-ChildItem -Path $searchDir -Filter "FileSync.Resources_backup.dll" -Recurse | Select-Object -First 1 | ForEach-Object { $_.FullName }
         Write-Host "Found FileSync.Resources_backup.dll in $(Split-Path -Path $backupPath -Parent)" -ForegroundColor DarkYellow
         Remove-Item $dllPath -Force
-        Write-Host "Restoring $dllPath" -ForegroundColor Yellow
+        Write-Host "Restoring default icons..." -ForegroundColor Yellow
         Move-Item -Path $backupPath -Destination $dllPath -Force
         Start-Sleep -Seconds 1
     }
