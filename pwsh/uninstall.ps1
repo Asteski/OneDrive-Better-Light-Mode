@@ -18,7 +18,7 @@ for ($a=3; $a -ge 0; $a--) {
     Start-Sleep 1
 }
 Write-Host "`r" -NoNewline
-Write-Host "OneDrive Light Mode tray icons restore deployment is starting..." -ForegroundColor Yellow
+Write-Host "OneDrive Light Mode tray icons restore is starting...  " -ForegroundColor Yellow
 Stop-Process -n OneDrive -Force
 $searchDirList = @(
     "$env:LOCALAPPDATA\Microsoft\OneDrive\",
