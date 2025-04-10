@@ -35,4 +35,4 @@ ForEach ($searchDir in $searchDirList){
         Start-Sleep -Seconds 1
     }
 }
-Write-Host "OneDrive Light Mode tray icons have been restored. Please restart OneDrive." -ForegroundColor Green
+Write-Host "`nOneDrive Light Mode tray icons have been restored. Please restart OneDrive." -ForegroundColor Green
