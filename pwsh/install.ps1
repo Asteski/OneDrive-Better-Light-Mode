@@ -10,15 +10,15 @@ GitHub: https://github.com/Asteski/OneDrive-Better-Light-Mode
 This is work in progress. You're using this script at your own risk.
 
 -----------------------------------------------------------------------
-
 "@ -ForegroundColor Cyan
 Start-Sleep 1
+Write-Host
 for ($a=3; $a -ge 0; $a--) {
     Write-Host "`rOneDrive Light Mode tray icons will be applied in $a" -NoNewline -ForegroundColor Yellow
     Start-Sleep 1
 }
 Write-Host "`r" -NoNewline
-Write-Host "OneDrive Light Mode tray icons deployment is now starting..." -ForegroundColor Yellow
+Write-Host "OneDrive Light Mode tray icons deployment is starting..." -ForegroundColor Yellow
 Stop-Process -n OneDrive -Force
 $searchDirList = @(
     "$env:LOCALAPPDATA\Microsoft\OneDrive\",
@@ -26,10 +26,10 @@ $searchDirList = @(
 )
 $newIconList = Get-ChildItem -Path "$PSScriptRoot\..\assets" -Filter "FileSync_*.ico" | ForEach-Object { $_.FullName }
 ForEach ($searchDir in $searchDirList){
-    $dllPath = Get-ChildItem -Path $searchDir -Filter "FileSync.Resources.dll" -Recurse -ErrorAction SilentlyContinue | Select-Object -First 1 | ForEach-Object { $_.FullName }
+    $dllPath = Get-ChildItem -Path $searchDir -Filter "FileSync.Resources.dll" -Recurse | Select-Object -First 1 | ForEach-Object { $_.FullName }
     if ($dllPath) {
         $backupPath = $dllPath.Replace([System.IO.Path]::GetExtension($dllPath), "_backup" + [System.IO.Path]::GetExtension($dllPath))
-        Copy-Item -Path $dllPath -Destination $backupPath -Force -ErrorAction SilentlyContinue
+        Copy-Item -Path $dllPath -Destination $backupPath -Force
         ForEach ($newIconPath in $newIconList) {
             $iconGroup = "ICONGROUP," + [int]([regex]::Match($newIconPath, '_(\d+)\.ico$').Groups[1].Value)
             ..\bin\ResourceHacker.exe -open $dllPath -save $dllPath -action addoverwrite -res $newIconPath -mask $iconGroup
