@@ -13,20 +13,20 @@ This is work in progress. You're using this script at your own risk.
 "@ -ForegroundColor Cyan
 Start-Sleep 1
 for ($a=3; $a -ge 0; $a--) {
-    Write-Host "`rOneDrive Light Mode tray icons will be now applied in $a" -NoNewline -ForegroundColor Yellow
+    Write-Host "`rOneDrive Light Mode tray icons will be applied in $a" -NoNewline -ForegroundColor Yellow
     Start-Sleep 1
 }
 Write-Host "`r" -NoNewline
-Write-Host "OneDrive Light Mode tray icons deployment is starting..." -ForegroundColor Yellow
+Write-Host "OneDrive Light Mode tray icons deployment is now starting..." -ForegroundColor Yellow
+Stop-Process -n OneDrive -Force -ErrorAction SilentlyContinue
 $searchDirList = @(
     "$env:LOCALAPPDATA\Microsoft\OneDrive\",
     "$env:PROGRAMFILES\Microsoft OneDrive\"
 )
 $newIconList = Get-ChildItem -Path "$PSScriptRoot\..\assets" -Filter "FileSync_*.ico" | ForEach-Object { $_.FullName }
-Stop-Process -n OneDrive -Force -ErrorAction SilentlyContinue
 ForEach ($searchDir in $searchDirList){
     $dllPath = Get-ChildItem -Path $searchDir -Filter "FileSync.Resources.dll" -Recurse -ErrorAction SilentlyContinue | Select-Object -First 1 | ForEach-Object { $_.FullName }
-    if ($null -ne $dllPath) {
+    if ($dllPath) {
         $backupPath = $dllPath.Replace([System.IO.Path]::GetExtension($dllPath), "_backup" + [System.IO.Path]::GetExtension($dllPath))
         Copy-Item -Path $dllPath -Destination $backupPath -Force -ErrorAction SilentlyContinue
         ForEach ($newIconPath in $newIconList) {

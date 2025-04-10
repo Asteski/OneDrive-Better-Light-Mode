@@ -17,7 +17,7 @@ for ($a=3; $a -ge 0; $a--) {
     Start-Sleep 1
 }
 Write-Host "`r" -NoNewline
-Write-Host "OneDrive Light Mode tray icons restore is starting..." -ForegroundColor Yellow
+Write-Host "OneDrive Light Mode tray icons restoration is now starting..." -ForegroundColor Yellow
 Stop-Process -n OneDrive -Force -ErrorAction SilentlyContinue
 $searchDirList = @(
     "$env:LOCALAPPDATA\Microsoft\OneDrive\",
@@ -27,8 +27,8 @@ ForEach ($searchDir in $searchDirList){
     $dllPath = Get-ChildItem -Path $searchDir -Filter "FileSync.Resources.dll" -Recurse -ErrorAction SilentlyContinue | Select-Object -First 1 | ForEach-Object { $_.FullName }
     if ($dllPath) {
         $backupPath = Get-ChildItem -Path $searchDir -Filter "FileSync.Resources_backup.dll" -Recurse | Select-Object -First 1 | ForEach-Object { $_.FullName }
-        Copy-Item -Path $backupPath -Destination $dllPath -Force -ErrorAction SilentlyContinue
-        Remove-Item $backupPath -Force -ErrorAction SilentlyContinue
+        Remove-Item $dllPath -Force -ErrorAction SilentlyContinue
+        Move-Item -Path $backupPath -Destination $dllPath -Force -ErrorAction SilentlyContinue
         Start-Sleep -Seconds 1
     }
 }
