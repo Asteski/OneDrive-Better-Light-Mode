@@ -1,7 +1,17 @@
-Write-Host "==========================" -ForegroundColor White
-Write-Host "OneDrive Better Light Mode" -ForegroundColor White
-Write-Host "==========================" -ForegroundColor White
-Write-Host "OneDrive Light Mode tray icons will be now applied." -ForegroundColor Yellow
+Write-Host @"
+-----------------------------------------------------------------------
+
+Welcome to OneDrive Better Light Mode Deployment!
+
+Author: Asteski
+GitHub: https://github.com/Asteski/OneDrive-Better-Light-Mode
+
+This is work in progress. You're using this script at your own risk.
+
+-----------------------------------------------------------------------
+"@ -ForegroundColor Cyan
+Start-Sleep 1
+Write-Host "OneDrive Light Mode tray icons will be now applied in" -ForegroundColor Yellow
 for ($a=3; $a -ge 0; $a--) {
     Write-Host -NoNewLine "`b$a" -ForegroundColor Red
     Start-Sleep 1
