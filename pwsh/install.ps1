@@ -11,11 +11,11 @@ This is work in progress. You're using this script at your own risk.
 -----------------------------------------------------------------------
 "@ -ForegroundColor Cyan
 Start-Sleep 1
-Write-Host "OneDrive Light Mode tray icons will be now applied in" -ForegroundColor Yellow
 for ($a=3; $a -ge 0; $a--) {
-    Write-Host -NoNewLine "`b$a" -ForegroundColor Red
+    Write-Host "`rOneDrive Light Mode tray icons will be now applied in $a" -NoNewline -ForegroundColor Yellow
     Start-Sleep 1
 }
+Write-Host "`r" -NoNewline
 $searchDirList = @(
     "$env:LOCALAPPDATA\Microsoft\OneDrive\",
     "$env:PROGRAMFILES\Microsoft OneDrive\"
@@ -34,4 +34,5 @@ ForEach ($searchDir in $searchDirList){
         }
     }
 }
-Write-Host "OneDrive Light Mode tray icons have been applied. Please restart OneDrive." -ForegroundColor Green
+Start-Sleep 1
+Write-Host "`nOneDrive Light Mode tray icons have been applied. Please restart OneDrive." -ForegroundColor Green
