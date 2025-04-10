@@ -1,3 +1,11 @@
+Write-Host "==========================" -ForegroundColor White
+Write-Host "OneDrive Better Light Mode" -ForegroundColor White
+Write-Host "==========================" -ForegroundColor White
+Write-Host "OneDrive Light Mode tray icons will be now applied." -ForegroundColor Yellow
+for ($a=3; $a -ge 0; $a--) {
+    Write-Host -NoNewLine "`b$a" -ForegroundColor Red
+    Start-Sleep 1
+}
 $searchDirList = @(
     "$env:LOCALAPPDATA\Microsoft\OneDrive\",
     "$env:PROGRAMFILES\Microsoft OneDrive\"
@@ -11,7 +19,7 @@ ForEach ($searchDir in $searchDirList){
         Copy-Item -Path $dllPath -Destination $backupPath -Force -ErrorAction SilentlyContinue
         ForEach ($newIconPath in $newIconList) {
             $iconGroup = "ICONGROUP," + [int]([regex]::Match($newIconPath, '_(\d+)\.ico$').Groups[1].Value)
-            ..\bin\resourcehacker.exe -open $dllPath -save $dllPath -action addoverwrite -res $newIconPath -mask $iconGroup
+            ..\bin\ResourceHacker.exe -open $dllPath -save $dllPath -action addoverwrite -res $newIconPath -mask $iconGroup
             Start-Sleep -Seconds 1
         }
     }
