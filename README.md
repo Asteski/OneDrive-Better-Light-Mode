@@ -7,8 +7,8 @@ Currently in development.
 ## How to
 
 - Clone repository locally
-- Run EasyLauncher.bat from to install new icons
-- Run EasyLauncher.bat -u from to restore default icons
+- Run _EasyLauncher.bat_ to install new icons
+- Run _EasyLauncher.bat_ -u to restore default icons
 
 ## Important notes
 
