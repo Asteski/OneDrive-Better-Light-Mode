@@ -33,7 +33,7 @@ ForEach ($searchDir in $searchDirList){
         $backupPath = $dllPath.Replace([System.IO.Path]::GetExtension($dllPath), "_backup" + [System.IO.Path]::GetExtension($dllPath))
         Write-Host "Backup path: $backupPath" -ForegroundColor DarkYellow
         Copy-Item -Path $dllPath -Destination $backupPath -Force
-        Write-Host "`Applying new icons..." -ForegroundColor Yellow
+        Write-Host "Applying new icons..." -ForegroundColor Yellow
         ForEach ($newIconPath in $newIconList) {
             $iconGroup = "ICONGROUP," + [int]([regex]::Match($newIconPath, '_(\d+)\.ico$').Groups[1].Value)
             ..\bin\ResourceHacker.exe -open $dllPath -save $dllPath -action addoverwrite -res $newIconPath -mask $iconGroup > $null 2>&1
@@ -42,4 +42,4 @@ ForEach ($searchDir in $searchDirList){
     }
 }
 Start-Sleep 1
-Write-Host "`nOneDrive Light Mode tray icons have been applied. Please restart OneDrive." -ForegroundColor Green
+Write-Host "OneDrive Light Mode tray icons have been applied. Please restart OneDrive." -ForegroundColor Green
