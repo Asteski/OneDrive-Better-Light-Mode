@@ -8,13 +8,15 @@ $newIconList = @(
 )
 Stop-Process -n OneDrive -Force
 ForEach ($searchDir in $searchDirList){
-    $dllPath = Get-ChildItem -Path $searchDir -Filter "FileSync.Resources.dll" -Recurse | Select-Object -First 1 | ForEach-Object { $_.FullName }
-    $backupPath = $dllPath.Replace([System.IO.Path]::GetExtension($dllPath), "_backup" + [System.IO.Path]::GetExtension($dllPath))
-    Copy-Item -Path $dllPath -Destination $backupPath -Force -ErrorAction SilentlyContinue
-    ForEach ($newIconPath in $newIconList) {
-        $iconGroup = "ICONGROUP," + [int]([regex]::Match($newIconPath, '_(\d+)\.ico$').Groups[1].Value)
-        pwsh -NoProfile -Command "..\bin\resourcehacker.exe -open `"$dllPath`" -save `"$dllPath`" -action addoverwrite -res `"$newIconPath`" -mask $iconGroup"
-        Start-Sleep -Seconds 1
+    $dllPath = Get-ChildItem -Path $searchDir -Filter "FileSync.Resources.dll" -Recurse -ErrorAction SilentlyContinue | Select-Object -First 1 | ForEach-Object { $_.FullName }
+    if ($null -ne $dllPath) {
+        $backupPath = $dllPath.Replace([System.IO.Path]::GetExtension($dllPath), "_backup" + [System.IO.Path]::GetExtension($dllPath))
+        Copy-Item -Path $dllPath -Destination $backupPath -Force -ErrorAction SilentlyContinue
+        ForEach ($newIconPath in $newIconList) {
+            $iconGroup = "ICONGROUP," + [int]([regex]::Match($newIconPath, '_(\d+)\.ico$').Groups[1].Value)
+            ..\bin\resourcehacker.exe -open `"$dllPath`" -save `"$dllPath`" -action addoverwrite -res `"$newIconPath`" -mask $iconGroup
+            Start-Sleep -Seconds 1
+        }
     }
 }
 Stop-Process -n Explorer -Force
