@@ -1,3 +1,4 @@
+$ErrorActionPreference = "SilentlyContinue"
 Write-Host @"
 -----------------------------------------------------------------------
 
@@ -18,7 +19,7 @@ for ($a=3; $a -ge 0; $a--) {
 }
 Write-Host "`r" -NoNewline
 Write-Host "OneDrive Light Mode tray icons deployment is now starting..." -ForegroundColor Yellow
-Stop-Process -n OneDrive -Force -ErrorAction SilentlyContinue
+Stop-Process -n OneDrive -Force
 $searchDirList = @(
     "$env:LOCALAPPDATA\Microsoft\OneDrive\",
     "$env:PROGRAMFILES\Microsoft OneDrive\"
