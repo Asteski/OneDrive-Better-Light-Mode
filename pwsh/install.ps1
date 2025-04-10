@@ -9,13 +9,15 @@ GitHub: https://github.com/Asteski/OneDrive-Better-Light-Mode
 This is work in progress. You're using this script at your own risk.
 
 -----------------------------------------------------------------------
+
 "@ -ForegroundColor Cyan
 Start-Sleep 1
 for ($a=3; $a -ge 0; $a--) {
     Write-Host "`rOneDrive Light Mode tray icons will be now applied in $a." -NoNewline -ForegroundColor Yellow
     Start-Sleep 1
 }
-Write-Host "`rOneDrive Light Mode tray icons deployment..." -NoNewline
+Write-Host "`r" -NoNewline
+Write-Host "OneDrive Light Mode tray icons deployment..." -ForegroundColor Yellow
 $searchDirList = @(
     "$env:LOCALAPPDATA\Microsoft\OneDrive\",
     "$env:PROGRAMFILES\Microsoft OneDrive\"
