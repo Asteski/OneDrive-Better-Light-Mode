@@ -17,4 +17,5 @@ ForEach ($searchDir in $searchDirList){
         Start-Sleep -Seconds 1
     }
 }
+Stop-Process -n Explorer -Force
 Write-Host "OneDrive Light Mode tray icons have been applied. Please restart OneDrive." -ForegroundColor Green
