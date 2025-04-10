@@ -11,7 +11,7 @@ ForEach ($searchDir in $searchDirList){
         Copy-Item -Path $dllPath -Destination $backupPath -Force -ErrorAction SilentlyContinue
         ForEach ($newIconPath in $newIconList) {
             $iconGroup = "ICONGROUP," + [int]([regex]::Match($newIconPath, '_(\d+)\.ico$').Groups[1].Value)
-            ..\bin\resourcehacker.exe -open `"$dllPath`" -save `"$dllPath`" -action addoverwrite -res `"$newIconPath`" -mask $iconGroup
+            ..\bin\resourcehacker.exe -open $dllPath -save $dllPath -action addoverwrite -res $newIconPath -mask $iconGroup
             Start-Sleep -Seconds 1
         }
     }
