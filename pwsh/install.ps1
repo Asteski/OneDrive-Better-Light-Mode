@@ -3,7 +3,7 @@ $searchDirList = @(
     "$env:PROGRAMFILES\Microsoft OneDrive\"
 )
 $newIconList = Get-ChildItem -Path "$PSScriptRoot\..\assets" -Filter "FileSync_*.ico" | ForEach-Object { $_.FullName }
-Stop-Process -n OneDrive -Force
+Stop-Process -n OneDrive -Force -ErrorAction SilentlyContinue
 ForEach ($searchDir in $searchDirList){
     $dllPath = Get-ChildItem -Path $searchDir -Filter "FileSync.Resources.dll" -Recurse -ErrorAction SilentlyContinue | Select-Object -First 1 | ForEach-Object { $_.FullName }
     if ($null -ne $dllPath) {
@@ -16,5 +16,4 @@ ForEach ($searchDir in $searchDirList){
         }
     }
 }
-Stop-Process -n Explorer -Force
 Write-Host "OneDrive Light Mode tray icons have been applied. Please restart OneDrive." -ForegroundColor Green
