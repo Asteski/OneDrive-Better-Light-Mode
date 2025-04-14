@@ -24,7 +24,8 @@ $searchDirList = @(
     "$env:LOCALAPPDATA\Microsoft\OneDrive\",
     "$env:PROGRAMFILES\Microsoft OneDrive\"
 )
-$newIconList = Get-ChildItem -Path "$PSScriptRoot\..\assets" -Filter "FileSync_*.ico" | ForEach-Object { $_.FullName }
+$newIconList = Get-ChildItem -Path "$PSScriptRoot\..\assets" -Filter 'FileSync_*.ico' | ForEach-Object { $_.FullName }
+$exeIconPath = Get-ChildItem -Path "$PSScriptRoot\..\assets" -Filter 'IconGroup552.ico' | Select-Object -First 1 | ForEach-Object { $_.FullName }
 ForEach ($searchDir in $searchDirList){
     $dllPath = Get-ChildItem -Path $searchDir -Filter "FileSync.Resources.dll" -Recurse | Select-Object -First 1 | ForEach-Object { $_.FullName }
     if ($dllPath) {
@@ -32,14 +33,19 @@ ForEach ($searchDir in $searchDirList){
         Write-Host "Backing up $dllPath" -ForegroundColor DarkYellow
         $backupPath = $dllPath.Replace([System.IO.Path]::GetExtension($dllPath), "_backup" + [System.IO.Path]::GetExtension($dllPath))
         Write-Host "Backup path: $backupPath" -ForegroundColor DarkYellow
-        Copy-Item -Path $dllPath -Destination $backupPath -Force
+        $exePath = Get-ChildItem -Path $searchDir -Filter "OneDrive.exe" -Recurse | Select-Object -First 1 | ForEach-Object { $_.FullName }
+        $backupPath = $exePath.Replace([System.IO.Path]::GetExtension($exePath), "_backup" + [System.IO.Path]::GetExtension($dllPath))
+        Copy-Item -Path $exePath -Destination $backupPath -Force
         Write-Host "Applying new icons..." -ForegroundColor Yellow
         ForEach ($newIconPath in $newIconList) {
             $iconGroup = "ICONGROUP," + [int]([regex]::Match($newIconPath, '_(\d+)\.ico$').Groups[1].Value)
             ..\bin\ResourceHacker.exe -open $dllPath -save $dllPath -action addoverwrite -res $newIconPath -mask $iconGroup > $null 2>&1
             Start-Sleep -Seconds 1
         }
+        ..\bin\ResourceHacker.exe -open $exePath -save $exePath -action addoverwrite -res $exeIconPath -mask ICONGROUP,552 > $null 2>&1
+        Start-Sleep -Seconds 1
     }
 }
+
 Start-Sleep 1
 Write-Host "OneDrive Light Mode tray icons have been applied. Please restart OneDrive." -ForegroundColor Green
