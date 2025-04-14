@@ -16,4 +16,4 @@ Keep in mind, that icon replacement is not permanent! Every OneDrive update will
 
 ## Future plans
 - &#x2610; more light mode tray icons
-- &#x2610; remove Windows 10 folder from default OneDrive icon
+- &#x2612; remove Windows 10 folder from default OneDrive icon
