@@ -34,7 +34,7 @@ ForEach ($searchDir in $searchDirList){
         $backupPath = $dllPath.Replace([System.IO.Path]::GetExtension($dllPath), "_backup" + [System.IO.Path]::GetExtension($dllPath))
         Write-Host "Backup path: $backupPath" -ForegroundColor DarkYellow
         $exePath = Get-ChildItem -Path $searchDir -Filter "OneDrive.exe" -Recurse | Select-Object -First 1 | ForEach-Object { $_.FullName }
-        $backupPath = $exePath.Replace([System.IO.Path]::GetExtension($exePath), "_backup" + [System.IO.Path]::GetExtension($dllPath))
+        $backupPath = $exePath.Replace([System.IO.Path]::GetExtension($exePath), "_backup" + [System.IO.Path]::GetExtension($exePath))
         Copy-Item -Path $exePath -Destination $backupPath -Force
         Write-Host "Applying new icons..." -ForegroundColor Yellow
         ForEach ($newIconPath in $newIconList) {
