@@ -30,7 +30,6 @@ ForEach ($searchDir in $searchDirList){
     $dllPath = Get-ChildItem -Path $searchDir -Filter "FileSync.Resources.dll" -Recurse | Select-Object -First 1 | ForEach-Object { $_.FullName }
     if ($dllPath) {
         Write-Host "Found FileSync.Resources.dll in $(Split-Path -Path $dllPath -Parent)" -ForegroundColor DarkYellow
-        Write-Host "Backing up $dllPath" -ForegroundColor DarkYellow
         $backupPath = $dllPath.Replace([System.IO.Path]::GetExtension($dllPath), "_backup" + [System.IO.Path]::GetExtension($dllPath))
         Write-Host "Backup path: $backupPath" -ForegroundColor DarkYellow
         Write-Host "Found OneDrive.exe in $(Split-Path -Path $dllPath -Parent)" -ForegroundColor DarkYellow
