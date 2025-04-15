@@ -33,7 +33,6 @@ ForEach ($searchDir in $searchDirList){
         $backupPath = $dllPath.Replace([System.IO.Path]::GetExtension($dllPath), "_backup" + [System.IO.Path]::GetExtension($dllPath))
         Write-Host "Backup path: $backupPath" -ForegroundColor DarkYellow
         Write-Host "Found OneDrive.exe in $(Split-Path -Path $dllPath -Parent)" -ForegroundColor DarkYellow
-        Write-Host "Backing up $exePath" -ForegroundColor DarkYellow
         $exePath = Get-ChildItem -Path $searchDir -Filter "OneDrive.exe" -Recurse | Select-Object -First 1 | ForEach-Object { $_.FullName }
         $backupPath = $exePath.Replace([System.IO.Path]::GetExtension($exePath), "_backup" + [System.IO.Path]::GetExtension($exePath))
         Write-Host "Backup path: $backupPath" -ForegroundColor DarkYellow
