@@ -2,6 +2,10 @@
 
 Using Powershell script and Resource Hacker, apply different set of OneDrive tray icons, to resemble macOS design for light mode.
 
+<div align="center">
+    <img src="./assets/preview.png" alt="OneDrive Light Mode Icon">
+</div>
+
 ## How to
 
 - clone repository locally
