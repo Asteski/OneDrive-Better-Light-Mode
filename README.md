@@ -9,8 +9,10 @@ Using Powershell script and Resource Hacker, apply different set of OneDrive tra
 ## How to
 
 - clone repository locally
-- run _EasyLauncher.bat_ to install new icons
-- run _EasyLauncher.bat -u_ to restore default icons
+- run _EasyLauncher.bat_ to install new icons*
+- run _EasyLauncher.bat -u_ to restore default icons*
+
+<sub>* if OneDrive is stored in Program Files, batch file must be run as an Administrator</sub>
 
 ## Important notes
 
